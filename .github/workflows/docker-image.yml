@@ -35,7 +35,9 @@ jobs:
         with:
           #major | feature | bug | alpha | beta | rc 
           current-version: ${{ steps.meta.outputs.tags }}
-          version-fragment: 'bug'            
+          version-fragment: 'bug' 
+        run:
+          cat ${{ steps.meta.outputs.tags }}        
 
       -
         name: Login to DockerHub
