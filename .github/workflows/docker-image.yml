@@ -28,6 +28,11 @@ jobs:
             latest=false
           tags: |
             type=semver,pattern={{version}},value=1.0.0
+
+      - 
+        name: print version
+        run: |
+          cat ${{ steps.meta.outputs.tags }}  
       - 
         name: Bump release version
         id: bump_version
@@ -35,9 +40,7 @@ jobs:
         with:
           #major | feature | bug | alpha | beta | rc 
           current-version: ${{ steps.meta.outputs.tags }}
-          version-fragment: 'bug' 
-        run:
-          cat ${{ steps.meta.outputs.tags }}        
+          version-fragment: 'bug'       
 
       -
         name: Login to DockerHub
