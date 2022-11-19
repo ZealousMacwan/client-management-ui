@@ -26,6 +26,16 @@ jobs:
           images: zealousmacwan/client-management-ui
           flavor: |
             latest=false
+          tags: |
+            type=semver,pattern={{version}},value=v1.0.0,suffix=-dev
+      - 
+        name: Bump release version
+        id: bump_version
+        uses: christian-draeger/increment-semantic-version@1.0.3
+        with:
+          #major | feature | bug | alpha | beta | rc 
+          current-version: ${{ steps.meta.outputs.tags }}
+          version-fragment: 'bug'            
 
       -
         name: Login to DockerHub
@@ -41,8 +51,7 @@ jobs:
           context: .
           target: development
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            type=semver,pattern={{version}},value=v1.0.0,suffix=-dev
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
 
