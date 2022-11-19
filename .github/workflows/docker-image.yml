@@ -26,8 +26,6 @@ jobs:
           images: zealousmacwan/client-management-ui
           flavor: |
             latest=false
-          tags: |
-            type=semver,pattern={{version}},value=v1.0.0,suffix=-dev
 
       -
         name: Login to DockerHub
@@ -43,7 +41,8 @@ jobs:
           context: .
           target: development
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            type=semver,pattern={{version}},value=v1.0.0,suffix=-dev
           labels: ${{ steps.meta.outputs.labels }}
 
 
