@@ -22,6 +22,7 @@ jobs:
           fetch-depth: '0'
 
       - name: Bump version and push tag
+        id: taggerDryRun
         uses: anothrNick/github-tag-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -38,8 +39,6 @@ jobs:
             latest=false
           tags: |
             type=semver,pattern={{version}},value=${{ steps.taggerDryRun.outputs.new_tag }}
-
-
 
       -
         name: Login to DockerHub
