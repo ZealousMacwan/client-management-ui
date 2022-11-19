@@ -27,7 +27,7 @@ jobs:
           flavor: |
             latest=false
           tags: |
-            type=semver,pattern={{version}},value=v1.0.0,suffix=-dev
+            type=semver,pattern={{version}},value=v1.0.0,suffix=-alpha
       - 
         name: Bump release version
         id: bump_version
