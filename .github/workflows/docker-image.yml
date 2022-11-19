@@ -24,6 +24,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: zealousmacwan/client-management-ui
+          flavor: |
+            latest=false
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
