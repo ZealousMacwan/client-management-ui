@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 
+const { REACT_APP_BASE_API_URL} = process.env;
 
 class ClientEdit extends Component {
 
@@ -22,7 +23,7 @@ class ClientEdit extends Component {
 
     async componentDidMount() {
         if (this.props.match.params.id !== 'new') {
-            const client = await (await fetch(`/clients/${this.props.match.params.id}`)).json();
+            const client = await (await fetch(`${REACT_APP_BASE_API_URL}/clients/${this.props.match.params.id}`)).json();
             this.setState({item: client});
         }
     }
@@ -40,7 +41,7 @@ async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
 
-    await fetch('/clients' + (item.id ? '/' + item.id : ''), {
+    await fetch(`${REACT_APP_BASE_API_URL}/clients` + (item.id ? '/' + item.id : ''), {
         method: (item.id) ? 'PUT' : 'POST',
         headers: {
             'Accept': 'application/json',

@@ -3,10 +3,12 @@ import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 
+const { REACT_APP_BASE_API_URL} = process.env;
+
 
 class ClientList extends Component {
 
-    
+
 
     constructor(props) {
         super(props);
@@ -18,13 +20,13 @@ class ClientList extends Component {
     componentDidMount() {
         
         console.log(this.myenv);
-        fetch('/clients')
+        fetch(`${REACT_APP_BASE_API_URL}/clients`)
             .then(response => response.json())
             .then(data => this.setState({clients: data}));
     }
 
     async remove(id) {
-        await fetch(`/clients/${id}`, {
+        await fetch(`${REACT_APP_BASE_API_URL}/clients/${id}`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
